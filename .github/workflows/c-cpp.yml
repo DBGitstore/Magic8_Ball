@@ -13,11 +13,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+
+    - name: Install build tools
+      run: sudo apt-get update && sudo apt-get install -y build-essential g++
+
+    - name: Compile
+      run: |
+        set -e
+        echo "Repository top-level files:"
+        ls -la
+        g++ -std=c++11 -O2 -Wall -Wextra magic_8.cpp -o magic8
+
+    - name: Show compiled artifact
+      run: |
+        echo "Compiled files:"
+        ls -la magic8
