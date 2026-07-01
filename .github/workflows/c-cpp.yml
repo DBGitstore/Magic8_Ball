@@ -28,3 +28,10 @@ jobs:
       run: |
         echo "Compiled files:"
         ls -la magic8
+
+    - name: Upload compiled binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: magic8-executable
+        path: magic8
+
